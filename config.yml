@@ -1,0 +1,7 @@
+logging:
+  level: INFO
+  loggers:
+    eu.tjago: DEBUG
+
+defaultName: Stranger
+template: Hello %s!
