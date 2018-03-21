@@ -10,8 +10,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import java.util.List;
+import javax.ws.rs.core.*;
 
 @Path("/fruits")
 @Produces(MediaType.APPLICATION_JSON)
@@ -27,14 +26,17 @@ public class FruitsResource {
     @GET
     @Path("/all")
     @Timed
-    public List<Fruit> getAll() {
-        return fruitStore.getAll();
+    public Response getAll() {
+        return Response.ok().entity(fruitStore.getAll()).build();
     }
 
     @POST
     @Path("/insert")
     @Timed
-    public  void insert(Fruit fruit) {
+    public Response insert(Fruit fruit, @Context UriInfo uriInfo) {
         fruitStore.add(fruit);
+        UriBuilder uriBuilder = uriInfo.getAbsolutePathBuilder();
+        uriBuilder.path(fruit.getName());
+        return Response.created(uriBuilder.build()).build();
     }
 }
