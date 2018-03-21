@@ -3,6 +3,8 @@ package eu.tjago.core;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import eu.tjago.api.Fruit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +13,12 @@ import java.util.Optional;
 @Singleton
 public class FruitStore {
 
+    Logger logger = LoggerFactory.getLogger(FruitStore.class);
     private List<Fruit> fruitList = new ArrayList();
 
     @Inject
     public FruitStore() {
+        logger.info("Hello from FruitStore!");
         fruitList.add(new Fruit("Banana",5));
         fruitList.add(new Fruit("Orange", 11));
     }

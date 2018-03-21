@@ -1,8 +1,6 @@
 package eu.tjago;
 
 import com.hubspot.dropwizard.guice.GuiceBundle;
-import eu.tjago.health.TemplateHealthCheck;
-import eu.tjago.resources.HelloResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
