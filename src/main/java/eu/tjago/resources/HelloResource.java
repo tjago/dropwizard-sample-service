@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import eu.tjago.api.Saying;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.valuehandling.UnwrapValidatedValue;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -30,7 +32,7 @@ public class HelloResource {
 
     @GET
     @Timed
-    public Saying sayHello(@QueryParam("name") Optional<String> name) {
+    public Saying sayHello(@QueryParam("name") @UnwrapValidatedValue @NotEmpty Optional<String> name) {
         final String value = String.format(template, name.orElse(defaultName));
         return new Saying(counter.incrementAndGet(), value);
     }
